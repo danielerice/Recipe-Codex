@@ -2,22 +2,22 @@ class RecipeBooksController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
-    #before_action :authorize
+    before_action :authorize
 
-    # #GET /recipe_books
-    # def index
-        # user = User.find(session[:user_id])
-        # render json: user.recipe_books, status: :ok
-    # end
+    #GET /recipe_books
+    def index
+        user = User.find(session[:user_id])
+        render json: user.recipe_books, status: :ok
+    end
 
-    #GET /recipe_books/:id
+    #GET /recipe_book/:id
     def show
         recipe_book = RecipeBook.find(params[:id])
         render json: recipe_book, status: :ok
     end
 
-    #PATCH /recipe_books/:id
-    def updated
+    #PATCH /recipe_book/:id
+    def update
         recipe_book = RecipeBook.find(params[:id])
         recipe_book.update(recipe_book_params)
         render json: recipe_book, status: :ok
@@ -29,7 +29,7 @@ class RecipeBooksController < ApplicationController
         render json: recipe_book, status: :created
     end
 
-    #DELETE /recipe_books/:id
+    #DELETE /recipe_book/:id
     def destroy
         recipe_book = RecipeBook.find(params[:id])
         recipe_book.destroy

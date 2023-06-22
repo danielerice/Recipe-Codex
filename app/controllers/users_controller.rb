@@ -4,11 +4,11 @@ class UsersController < ApplicationController
 
     before_action :authorize
     skip_before_action :authorize, only: [:create]
-
+    
     #GET /me
     def show
         user = User.find(session[:user_id])
-        render json: user, status: :created
+        render json: user, status: :ok
     end
 
     #POST /signup

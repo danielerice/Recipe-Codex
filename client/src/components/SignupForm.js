@@ -36,7 +36,7 @@ import React, { useState } from "react";
     }
 
     return (
-      <div className="card">
+      <div className="formContainer">
       <form onSubmit={handleNewUser}>
         <label>Name:</label>
         <input
@@ -54,9 +54,9 @@ import React, { useState } from "react";
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <label>Passowrd:</label>
+        <label>Password:</label>
         <input
-          type="text"
+          type="password"
           id="name"
           autoComplete="off"
           value={password}
@@ -64,13 +64,13 @@ import React, { useState } from "react";
         />
         <label>Confirm Password:</label>
         <input
-          type="text"
+          type="password"
           id="name"
           autoComplete="off"
           value={confirmPassowrd}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <input type="submit" value="Login"></input>
+        <input type="submit" value="Create Account"></input>
         </form>
         </div>
     )};

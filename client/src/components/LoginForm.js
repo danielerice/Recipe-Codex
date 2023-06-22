@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 
-function LoginForm({ setUser }) {
+function LoginForm({ setUser, setErrors }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -25,11 +25,16 @@ function LoginForm({ setUser }) {
         
         const response = await fetch(`/login`, configObj)
         const newLogin = await response.json();
-        setUser(response);
+        
+        if (response.status === 201) {
+          setUser(newLogin)
+        } else {
+          setErrors(newLogin)
+        }
     }
 
   return (
-    <div className="card">
+    <div className="formContainer">
     <form onSubmit={handleLogin}>
       <label>Username:</label>
       <input
@@ -39,9 +44,9 @@ function LoginForm({ setUser }) {
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <label>Passowrd:</label>
+      <label>Password:</label>
       <input
-        type="text"
+        type="password"
         id="name"
         autoComplete="off"
         value={password}
