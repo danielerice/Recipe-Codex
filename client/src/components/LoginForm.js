@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 
 function LoginForm({ setUser, setErrors }) {
@@ -13,7 +13,7 @@ function LoginForm({ setUser, setErrors }) {
           "username": username,
           "password": password
           };
-        
+        console.log(formData)
         const configObj = {
           method: "POST",
           headers: {

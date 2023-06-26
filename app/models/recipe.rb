@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
-    has_many :recipe_books
-    has_many :users, through: :recipe_books
+    belongs_to :user
+    belongs_to :recipe_book
 
     validates :name, presence: true
     validates :ingredients, presence: true

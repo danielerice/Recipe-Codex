@@ -1,26 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Recipe from "./Recipe"
 
 
 function Home ({ user, recipes, setRecipes }) {
-
-
-    async function getRecipes ( ) {
-        const response = await fetch("/recipes")
-        const recipes = await response.json()
-        setRecipes(recipes)
-      }
+      
       useEffect(() => {
         // GET /recipes
-        console.log("getRecipes")
-        getRecipes();
-        console.log(recipes)
+        fetch("/recipes")
+        .then((response) => response.json())
+        .then((recipes) => setRecipes(recipes))
     
       }, []);
 
     return (
         <div>
-            <container className="center">
+            <div className="center">
                 {recipes.map((recipe) => {
                 return <Recipe
                     name={recipe.name}
@@ -28,9 +22,10 @@ function Home ({ user, recipes, setRecipes }) {
                     ingredients={recipe.ingredients}
                     category={recipe.category}
                     poster_id={recipe.poster_id}
+                    recipeID={recipe.id}
                     />
                 })}
-            </container>
+            </div>
         </div>
 
     )

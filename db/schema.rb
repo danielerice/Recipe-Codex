@@ -18,8 +18,6 @@ ActiveRecord::Schema.define(version: 2023_06_21_213910) do
   create_table "recipe_books", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.integer "user_id"
-    t.integer "recipe_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -29,7 +27,8 @@ ActiveRecord::Schema.define(version: 2023_06_21_213910) do
     t.text "directions"
     t.text "ingredients"
     t.string "category"
-    t.integer "poster_id"
+    t.integer "user_id"
+    t.integer "recipe_book_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

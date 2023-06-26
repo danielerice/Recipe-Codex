@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "./Login";
 import Home from "./Home";
 import NewRecipe from "./NewRecipe";
-import NewRecipeBox from "./NewRecipeBox"
+import NewRecipeBook from "./NewRecipeBook"
 import MyRecipeBooks from "./MyRecipeBooks"
 
 
@@ -12,6 +12,8 @@ import MyRecipeBooks from "./MyRecipeBooks"
 function App() {
   const [user, setUser] = useState(null);
   const [recipes, setRecipes] = useState([]);
+  const [recipeBooks, setRecipeBooks] = useState();
+  const [errors, setErrors] = useState();
 
   async function autoLogin ( ) {
     const response = await fetch("/me")
@@ -24,42 +26,60 @@ function App() {
     autoLogin();
 
   }, []);
+  
+  useEffect(() => {
+    fetch("/recipe_books")
+    .then((response) => response.json())
+    .then((recipeBooks) => setRecipeBooks(recipeBooks))
+  }, []);
 
-
-  if (!user) return <Login user={user} setUser={setUser} />;
+  if (!user) return <Login user={user} setUser={setUser} setErrors={setErrors}/>;
   
   return (
     <div>
-      <NavBar setUser={setUser}/>
+      <NavBar key={'navBar'} setUser={setUser}/>
       <Routes>
         
         <Route 
-        path="/"
-        element={
-          <Home user={user}
-          recipes = {recipes}
-          setRecipes = {setRecipes}
-          />
+          path="/"
+          element={
+            <Home 
+            key={'home'}
+            user = {user}
+            recipes = {recipes}
+            setRecipes = {setRecipes}
+            />
         }
         ></Route>
         <Route 
-        path="/newrecipe"
-        element={
-          <NewRecipe user={user}/>
-        }
+          path="/newrecipe"
+          element={
+            <NewRecipe 
+            key={'newRecipe'}
+            user={user}
+            />
+          }
         ></Route>
         <Route 
-        path="/newrecipebox"
-        element={
-          <NewRecipeBox user={user}/>
-        }
+          path="/newrecipebook"
+          element={
+            <NewRecipeBook 
+            key={'newRecipeBook'}
+            user={user}
+            />
+          }
         ></Route>
 
         <Route 
-        path="/myrecipebooks"
-        element={
-          <MyRecipeBooks user={user}/>
-        }
+          path="/myrecipebooks"
+          element={
+            <MyRecipeBooks 
+            key={'myRecipeBooks'}
+            recipeBooks={recipeBooks}
+            setRecipeBooks={setRecipeBooks}
+            user={user}
+            />
+          }
         ></Route>
         
         <Route></Route>

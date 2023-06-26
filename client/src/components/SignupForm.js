@@ -27,7 +27,8 @@ import React, { useState } from "react";
             };
         
         const response = await fetch(`/signup`, configObj)
-        const newUser = await response.json();
+        const newUser = await response.json(); // error handling
+        console.log(newUser)
         setName("");
         setUsername("");
         setPassword("");
@@ -49,7 +50,7 @@ import React, { useState } from "react";
         <label>Username:</label>
         <input
           type="text"
-          id="name"
+          id="username"
           autoComplete="off"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
@@ -57,7 +58,7 @@ import React, { useState } from "react";
         <label>Password:</label>
         <input
           type="password"
-          id="name"
+          id="password"
           autoComplete="off"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -65,7 +66,7 @@ import React, { useState } from "react";
         <label>Confirm Password:</label>
         <input
           type="password"
-          id="name"
+          id="cofrimPassword"
           autoComplete="off"
           value={confirmPassowrd}
           onChange={(e) => setConfirmPassword(e.target.value)}

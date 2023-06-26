@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
-function NavBar({ setUser}) {
+function NavBar({ setUser }) {
 
   async function handleLogOut (e) {
     e.preventDefault()
     const response = await fetch("/logout", { method: "DELETE" })
-    setUser(null)
+    setUser()
   }
   return (
     <div className="wrapper">
@@ -18,7 +17,7 @@ function NavBar({ setUser}) {
     </p>
     </Link>
     
-    <container className="navBarContainer">
+    <div className="navBarContainer">
     <Link to="/myrecipebooks">
     <p className="navLink" >
       my recipe books
@@ -31,14 +30,14 @@ function NavBar({ setUser}) {
     </p>
     </Link>
 
-    <Link to="/newrecipebox">
+    <Link to="/newrecipebook">
     <p className="navLink" >
-      new recipe box
+      new recipe book
     </p>
     </Link>
     
     <button onClick={(e) => handleLogOut(e)}>log out</button>
-    </container>
+    </div>
     </div>
   );
 }

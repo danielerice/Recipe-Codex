@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 
 
-function RecipeBook ({ user }) {
+function RecipeBook ({ user, recipeBookID, description, name }) {
 
+    
     return (
         <div>
-        <container className="center">
-            <div className="card">
-                <ul>
-                    <li>newrecipe</li>
-                    <li>poopoo</li>
-                </ul>
+            <div className="center">
+                <div key={recipeBookID} className="card">
+                    <p key={name}>{name}</p>
+                    <p key={recipeBookID+1}>{description}</p>
+                </div>
             </div>
-        </container>
-    </div>
+        </div>
 
     )
 }

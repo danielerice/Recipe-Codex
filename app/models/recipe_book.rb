@@ -1,5 +1,5 @@
 class RecipeBook < ApplicationRecord
-    belongs_to :user
+    has_many :users, through: :recipes
     has_many :recipes
 
     validates :name, presence: true

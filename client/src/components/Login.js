@@ -3,7 +3,7 @@ import SignupForm from "./SignupForm";
 import LoginForm from "./LoginForm";
 
 
-    function Login({ user, setUser }) {
+    function Login({ user, setUser, setErrors }) {
         const [newUser, setNewUser] = useState(false)
         
     return (
@@ -14,13 +14,13 @@ import LoginForm from "./LoginForm";
             <div className="container">
             {newUser ? (
                 <div className="hero">
-                <LoginForm setUser={setUser}/>
+                <LoginForm setUser={setUser} setErrors={setErrors}/>
                 <p className="account">Don't have an account?</p>&nbsp;
                 <button onClick={() => setNewUser(false)}>Sign Up</button>
                 </div>
             ) : (
             <div className="hero">
-                <SignupForm setUser={setUser}/>
+                <SignupForm setUser={setUser} setErrors={setErrors}/>
                 <p className="account">Already have an account?&nbsp;</p>
                 <button onClick={() => setNewUser(true)}>Log In</button>
             </div>

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 
-function Recipe ({ directions, name, ingredients, category, poster_id }) {
+function Recipe ({ directions, name, ingredients, category, poster_id, recipeID }) {
     console.log(directions)
     return (
-        <div className="card">
+        <div key={recipeID} className="card">
                 <p>{name}</p>
                 <p>{directions}</p>
                 <p>{category}</p>

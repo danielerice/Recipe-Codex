@@ -2,12 +2,11 @@ class RecipeBooksController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
-    before_action :authorize
+    #before_action :authorize
 
     #GET /recipe_books
     def index
-        user = User.find(session[:user_id])
-        render json: user.recipe_books, status: :ok
+        render json: RecipeBook.all, status: :ok
     end
 
     #GET /recipe_book/:id

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :recipe_books_recipes
   resources :recipes
   resources :recipe_books
   post '/signup', to: 'users#create'
