@@ -7,10 +7,6 @@ function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recip
     function deleteRecipe (e) {
         fetch(`/recipes/${recipeID}`, { method: "DELETE" })
         updateRecipe("delete", recipeID, recipe.user_id)
-        // const newRecipes = user.recipes.filter((recipe) => recipe.id !== recipeID)
-        // const updatedUser = user
-        // updatedUser.recipes = newRecipes
-        // setUser(updatedUser)
     }
 
     return (
