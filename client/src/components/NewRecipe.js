@@ -12,7 +12,7 @@ function NewRecipe ({ user }) {
     async function postNewRecipe (e) {
         //post to /recipes
         e.preventDefault()
-        console.log(name, directions)
+        //console.log(name, directions)
         const formData = {
             "name": name,
             "directions": directions,
@@ -30,7 +30,7 @@ function NewRecipe ({ user }) {
             
         const response = await fetch(`/recipes`, configObj);
         const newRecipe = await response.json(); // error handling
-        console.log(newRecipe)
+        //console.log(newRecipe)
         setName("");
         setDirections("")
     }

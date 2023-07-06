@@ -2,7 +2,7 @@ import React, {} from "react";
 import Recipe from "./Recipe"
 
 
-function MyRecipes ({ user }) {
+function MyRecipes ({ user, setUser, updateRecipe }) {
 
 
     console.log(user.recipes)
@@ -16,6 +16,7 @@ function MyRecipes ({ user }) {
                 recipeID={recipe.id} 
                 directions={recipe.directions}
                 recipe={recipe}
+                updateRecipe={updateRecipe}
                 />
             })}
         </div>

@@ -5,7 +5,7 @@ import RecipeBook from "./RecipeBook"
 function MyRecipeBooks ({ user }) {
 
 
-    console.log(user.recipe_books)
+    //console.log(user.recipe_books)
     return (
         <div>
         <div className="center">

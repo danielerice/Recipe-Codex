@@ -2,8 +2,8 @@ import React, {} from "react";
 import RecipeBook from "./RecipeBook"
 
 
-function Home ({ user, recipeBooks, setRecipeBooks, errors, setErrors, recipes, setRecipes }) {
-      console.log("in home:", recipeBooks)
+function Home ({ user, updateRecipe, recipeBooks, setRecipeBooks, errors, setErrors, recipes, setRecipes }) {
+      //console.log("in home:", recipeBooks)
 
     return (
         <div>
@@ -19,7 +19,7 @@ function Home ({ user, recipeBooks, setRecipeBooks, errors, setErrors, recipes, 
                 errors={errors}
                 setErrors={setErrors}
                 recipes={recipes}
-                setRecipes={setRecipes}
+                updateRecipe={updateRecipe}
                 />
             })}
         </div>

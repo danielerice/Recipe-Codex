@@ -47,6 +47,33 @@ function App() {
     getBooks();
 
     }, []);
+
+    function updateRecipe (action, token, token2) {
+      if (action === "delete") {
+        //finds and deletes the  in state recipe in the user's recipe array
+        const newRecipes = user.recipes.filter((recipe) => recipe.id !== token)
+        const updatedUser = user
+        updatedUser.recipes = newRecipes
+        console.log("in updateRecipe:",updatedUser)
+        //finds and deletes the in state recipe from the corresponding recipe book
+        console.log("in updaterecipe 1st filter", recipeBooks)
+        const targetBook = recipeBooks.filter((book) => book.id === token2)
+        console.log("target book:", targetBook)
+        const updatedRecipes = targetBook[0].recipes.filter((recipe) => recipe.id !== token)
+        console.log("updatedRecipes:",updatedRecipes)
+        targetBook.recipes = updatedRecipes
+        const updatedBooks = recipeBooks.map((book) => {
+          if(book.id === token2) {
+            const finishedBook = book
+            finishedBook.recipes = updatedRecipes
+            return finishedBook
+          } else {return book}
+        })
+        console.log("in updateRecipe:",updatedBooks)
+        setRecipeBooks(updatedBooks)
+        setUser(updatedUser)
+      }
+    }
   
   // useEffect(() => {
   //   //get /recipe_books
@@ -70,9 +97,9 @@ function App() {
               recipeBooks = {recipeBooks}
               setRecipeBooks = {setRecipeBooks}
               recipes={recipes}
-              setRecipes={setRecipes}
               errors={errors}
               setErrors={setErrors}
+              updateRecipe={updateRecipe}
               />
           }
           ></Route>
@@ -105,6 +132,7 @@ function App() {
               <MyRecipes 
               key={'myRecipes'}
               user={user}
+              updateRecipe={updateRecipe}
               />
             }
           ></Route>

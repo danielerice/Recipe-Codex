@@ -5,10 +5,10 @@ function NavBar({ setUser }) {
 
   async function handleLogOut (e) {
     e.preventDefault()
-    console.log("logout")
+    //console.log("logout")
     const response = await fetch("/logout", { method: "DELETE" })
     setUser("")
-    console.log("response:", response)
+    //console.log("response:", response)
   }
   return (
     <div className="wrapper">

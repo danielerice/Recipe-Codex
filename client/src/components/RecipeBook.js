@@ -3,7 +3,7 @@ import Recipe from "./Recipe";
 import NewRecipe from "./NewRecipe";
 
 
-function RecipeBook ({ user, recipeBookID, description, name, recipeBook, setErrors, errors }) {
+function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, recipeBook, setErrors, errors }) {
 
     const [open, setOpen] = useState(false);
     const [recipeName, setRecipeName] = useState("")
@@ -15,7 +15,7 @@ function RecipeBook ({ user, recipeBookID, description, name, recipeBook, setErr
     async function postNewRecipe (e) {
         //post to /recipes
         e.preventDefault()
-        console.log(name, directions)
+        //console.log(name, directions)
         const formData = {
             "name": recipeName,
             "directions": directions,
@@ -33,7 +33,7 @@ function RecipeBook ({ user, recipeBookID, description, name, recipeBook, setErr
             
         const response = await fetch(`/recipes`, configObj);
         const newRecipe = await response.json(); // error handling
-        console.log(newRecipe)
+        //console.log(newRecipe)
 
         if (response.status === 201) {
             recipeBook.recipes.push(newRecipe)
@@ -56,17 +56,19 @@ function RecipeBook ({ user, recipeBookID, description, name, recipeBook, setErr
                     <i>{description}</i>
                         { recipeBook.recipes.length > 0 ? (
                             recipeBook.recipes.map((recipe) => {
-                                console.log(recipe)
+                                //console.log(recipe)
                                 return (<Recipe 
                                             user={user}
+                                            recipeBookID={recipeBookID}
                                             name={recipe.name} 
                                             recipeID={recipe.id} 
                                             directions={recipe.directions}
                                             recipe={recipe}
+                                            updateRecipe={updateRecipe}
                                         />)})
                             ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
                     <button type="button" onClick={(e) => setOpen(!open)}>{open ? ("up Chevron") : ("Add a Recipe!") }</button>
-                    {open && <div class="content">
+                    {open && <div className="content">
                                 <div className="newRecipeCard">
                                     <form onSubmit={postNewRecipe}>
                                         <label>Name: </label>

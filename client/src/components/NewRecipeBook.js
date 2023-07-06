@@ -8,7 +8,7 @@ function NewRecipeBook ({ user, recipeBooks, setRecipeBooks, errors, setErrors }
 
         async function postNewRecipeBook (e) {
             e.preventDefault()
-            console.log(name, description)
+            //console.log(name, description)
             const formData = {
                 "name": name,
                 "description": description
@@ -30,7 +30,7 @@ function NewRecipeBook ({ user, recipeBooks, setRecipeBooks, errors, setErrors }
                 const updatedBooks = [...recipeBooks]
                 updatedBooks.push(newBook)
                 setRecipeBooks(updatedBooks)
-                console.log(recipeBooks)
+                //console.log(recipeBooks)
               } else {
                 setErrors(newBook)
                 console.log(newBook)
