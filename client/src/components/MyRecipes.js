@@ -4,13 +4,15 @@ import Recipe from "./Recipe"
 
 function MyRecipes ({ user, setUser, updateRecipe }) {
 
+    const myRecipes = true;
 
     console.log(user.recipes)
     return (
         <div>
         <div className="center">
             {user.recipes.map((recipe) => {
-                return <Recipe 
+                return <Recipe
+                myRecipes={myRecipes} 
                 user={user}
                 name={recipe.name} 
                 recipeID={recipe.id} 
