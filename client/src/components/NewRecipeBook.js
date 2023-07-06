@@ -1,35 +1,61 @@
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 
 
-function NewRecipeBox ({ user }) {
+function NewRecipeBook ({ user, recipeBooks, setRecipeBooks, errors, setErrors }) {
 
-    return (
-        <div className="center">
-        <div className="newRecipeCard">
-            <form>
-                <div className="inlineContainer">
-                <label for="menu1">Menu 1</label>
-                <select id="menu1" name="menu1">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-                </select>
+        const [name, setName] = useState("")
+        const [description, setDescription] = useState("")
 
-                <label for="menu2">Menu 2</label>
-                <select id="menu2" name="menu2">
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
-                </select>
+        async function postNewRecipeBook (e) {
+            e.preventDefault()
+            console.log(name, description)
+            const formData = {
+                "name": name,
+                "description": description
+                };
+            const configObj = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                },
+                body: JSON.stringify(formData),
+                };
+                
+            const response = await fetch(`/recipe_books`, configObj)
+            const newBook = await response.json(); // error handling
+            console.log(newBook)
 
-                <label for="text">Ingredient</label>
-                <input type="text" id="textinput"></input>
-                </div>
-            </form>
-        </div>
-        </div>
+            if (response.status === 201) {
+                const updatedBooks = [...recipeBooks]
+                updatedBooks.push(newBook)
+                setRecipeBooks(updatedBooks)
+                console.log(recipeBooks)
+              } else {
+                setErrors(newBook)
+                console.log(newBook)
+              }
+
+            setName("");
+            setDescription("")
+        
+            }
+
+    
+        return (
+            <div className="center">
+            <div className="newRecipeCard">
+                <form onSubmit={postNewRecipeBook}>
+                    <label>Name:</label>
+                    <input type="text" id="textinput" placeholder="This is an example!" onChange={(e) => setName(e.target.value)} value={name}></input>
+                    <label>Description:</label>
+                    <textarea id="directions" type="input" placeholder="All my faves!" onChange={(e) => setDescription(e.target.value)}></textarea>
+                    <button type="submit" >Submit</button>
+                </form>
+            </div>
+            </div>
 
     )
 }
 
-export default NewRecipeBox;
+export default NewRecipeBook;

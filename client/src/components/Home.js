@@ -1,32 +1,29 @@
-import React, { useEffect } from "react";
-import Recipe from "./Recipe"
+import React, {} from "react";
+import RecipeBook from "./RecipeBook"
 
 
-function Home ({ user, recipes, setRecipes }) {
-      
-      useEffect(() => {
-        // GET /recipes
-        fetch("/recipes")
-        .then((response) => response.json())
-        .then((recipes) => setRecipes(recipes))
-    
-      }, []);
+function Home ({ user, recipeBooks, setRecipeBooks, errors, setErrors, recipes, setRecipes }) {
+      console.log("in home:", recipeBooks)
 
     return (
         <div>
-            <div className="center">
-                {recipes.map((recipe) => {
-                return <Recipe
-                    name={recipe.name}
-                    directions={recipe.directions}
-                    ingredients={recipe.ingredients}
-                    category={recipe.category}
-                    poster_id={recipe.poster_id}
-                    recipeID={recipe.id}
-                    />
-                })}
-            </div>
+        <div className="home">
+            {recipeBooks.map((recipeBook) => {
+                return <RecipeBook
+                user={user}
+                recipeBook={recipeBook} 
+                key={recipeBook.id}
+                name={recipeBook.name} 
+                recipeBookID={recipeBook.id} 
+                description={recipeBook.description}
+                errors={errors}
+                setErrors={setErrors}
+                recipes={recipes}
+                setRecipes={setRecipes}
+                />
+            })}
         </div>
+    </div>
 
     )
 }

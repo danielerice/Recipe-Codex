@@ -6,7 +6,7 @@ class RecipeBooksController < ApplicationController
 
     #GET /recipe_books
     def index
-        render json: RecipeBook.all, status: :ok
+        render json: RecipeBook.all, include: :recipes, status: :ok
     end
 
     #GET /recipe_book/:id
@@ -24,7 +24,7 @@ class RecipeBooksController < ApplicationController
 
     #POST /recipe_books
     def create
-        recipe_book = RecipeBook.create(recipe_book_params)
+        recipe_book = RecipeBook.create!(recipe_book_params)
         render json: recipe_book, status: :created
     end
 
@@ -45,6 +45,6 @@ class RecipeBooksController < ApplicationController
     end
 
     def recipe_book_params
-        params.permit(:name, :description, :user_id)
+        params.permit(:name, :description)
     end
 end

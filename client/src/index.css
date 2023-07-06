@@ -1,6 +1,7 @@
 body {
   margin: 1.5em;
   font-family: sans-serif;
+  background-color: #a4a2c0
 }
 div.top{
   margin-left:auto;
@@ -20,14 +21,31 @@ p.account {
   margin-right: auto;
 }
 
+.bookCard {
+
+  margin-top: 10vh;
+
+  border: 3px solid black;
+
+  /* padding: 8px; */
+
+  /* border-radius: 12px; */
+
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .card {
-  background-color: white;
-
+  position: relative;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
   border: 1px solid black;
-
-  padding: 8px;
-
-  border-radius: 12px;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .container {
@@ -81,7 +99,7 @@ p.account {
 
   position: relative;
   margin-right: 2vw;
-  margin-top: 1vh;
+  margin-top: 1.7vh;
   font-family: 'Share Tech';
   font-style: normal;
   font-weight: 400;
@@ -93,11 +111,20 @@ p.account {
 }
 
 .center {
-  display: flex;
+  display: -moz-stack;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 60px);
   overflow-y: auto;
+  margin-top: 10vh;
+}
+.home {
+  display: -moz-stack;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  margin-top: 5vh;
 }
 
 .recipe {
@@ -106,6 +133,20 @@ p.account {
   background-color: #f9f9f9;
   margin: 10px;
   padding: 20px;
+}
+
+.delete{
+position: absolute;
+right: 0;
+top: 0;
+padding: 5px 10px;
+background-color: #a4a2c0;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 5px;
+margin-right: 5px;
 }
 
 /* Form styles */
@@ -220,70 +261,5 @@ p.account {
   background-color: #3e8e41;
 }
 
+/* Collapsible Styles */
 
-/* Inline form Style */
-
-.inlineContainer {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-
-.inlineContainer form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.inlineContainer label {
-  margin-bottom: 10px;
-  font-weight: bold;
-  flex-basis: 100%;
-}
-
-.inlineContainer input[type="text"],
-.inlineContainer input[type="email"],
-.inlineContainer input[type="password"] {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  flex-basis: calc(50% - 5px);
-}
-
-.inlineContainer select {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  flex-basis: calc(50% - 5px);
-}
-
-.inlineContainer textarea {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  resize: vertical;
-  flex-basis: 100%;
-}
-
-.inlineContainer button {
-  padding: 10px 20px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-}
-
-.inlineContainer button:hover {
-  background-color: #45a049;
-}
-
-.inlineContainer button:active {
-  background-color: #3e8e41;
-}

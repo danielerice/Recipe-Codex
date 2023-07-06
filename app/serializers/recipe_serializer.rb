@@ -1,7 +1,7 @@
 class RecipeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :directions, :ingredients, :category
+   attributes :id, :name, :directions, :ingredients #, :category, user_id, recipe_book_id
 
-  # has_many :users, through: :recipe_books
-  # has_many :recipe_books, through: :recipe_books_recipes
+  belongs_to :user
+  belongs_to :recipe_book
 
 end

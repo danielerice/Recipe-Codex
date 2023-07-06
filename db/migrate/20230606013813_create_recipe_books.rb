@@ -3,6 +3,8 @@ class CreateRecipeBooks < ActiveRecord::Migration[6.1]
     create_table :recipe_books do |t|
       t.string :name
       t.text :description
+
+
       t.timestamps
     end
   end

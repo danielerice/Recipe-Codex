@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 
-function Recipe ({ directions, name, ingredients, category, poster_id, recipeID }) {
+function Recipe ({ directions, name, ingredients, category, recipeID, user, recipe }) {
     console.log(directions)
     return (
         <div key={recipeID} className="card">
-                <p>{name}</p>
+                <h3>{name}</h3>{user.id = recipe.user_id ?  <></> : <button className="delete" >x</button> }
                 <p>{directions}</p>
                 <p>{category}</p>
                 <p>{ingredients}</p>

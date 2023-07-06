@@ -13,7 +13,7 @@ function LoginForm({ setUser, setErrors }) {
           "username": username,
           "password": password
           };
-        console.log(formData)
+        //console.log(formData)
         const configObj = {
           method: "POST",
           headers: {

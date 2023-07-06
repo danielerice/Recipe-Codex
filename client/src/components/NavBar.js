@@ -5,8 +5,10 @@ function NavBar({ setUser }) {
 
   async function handleLogOut (e) {
     e.preventDefault()
+    console.log("logout")
     const response = await fetch("/logout", { method: "DELETE" })
-    setUser()
+    setUser("")
+    console.log("response:", response)
   }
   return (
     <div className="wrapper">
@@ -18,17 +20,23 @@ function NavBar({ setUser }) {
     </Link>
     
     <div className="navBarContainer">
-    <Link to="/myrecipebooks">
+    {/* <Link to="/myrecipebooks">
     <p className="navLink" >
       my recipe books
     </p>
+    </Link> */}
+
+    <Link to="/myrecipes">
+    <p className="navLink" >
+      my recipes
+    </p>
     </Link>
     
-    <Link to="/newrecipe">
+    {/* <Link to="/newrecipe">
     <p className="navLink" >
       new recipe
     </p>
-    </Link>
+    </Link> */}
 
     <Link to="/newrecipebook">
     <p className="navLink" >

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, {} from "react";
 import RecipeBook from "./RecipeBook"
 
 
-function MyRecipeBooks ({ user, recipeBooks, setRecipeBooks }) {
+function MyRecipeBooks ({ user }) {
 
 
-    console.log(recipeBooks)
+    console.log(user.recipe_books)
     return (
         <div>
         <div className="center">
-            {recipeBooks.map((recipeBook) => {
-                return <RecipeBook 
+            {user.recipe_books.map((recipeBook) => {
+                return <RecipeBook
+                user={user} 
                 name={recipeBook.name} 
                 recipeBookID={recipeBook.id} 
                 description={recipeBook.description}
