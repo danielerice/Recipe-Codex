@@ -3,7 +3,7 @@ import Recipe from "./Recipe";
 import NewRecipe from "./NewRecipe";
 
 
-function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, recipeBook, setErrors, errors }) {
+function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, recipeBook, setErrors, errors, patchRecipe, updateRecipeBooks, updateUser }) {
 
     const [open, setOpen] = useState(false);
     const [recipeName, setRecipeName] = useState("")
@@ -33,21 +33,19 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
             
         const response = await fetch(`/recipes`, configObj);
         const newRecipe = await response.json(); // error handling
-        //console.log(newRecipe)
 
         if (response.status === 201) {
-            recipeBook.recipes.push(newRecipe)
+            let newRecipeBook = recipeBook
+            newRecipeBook.recipes.push(newRecipe)
+            updateRecipeBooks(newRecipeBook)
+            updateUser(newRecipe)
           } else {
             setErrors(newRecipe)
             console.log(newRecipe)
           }
-
+        
         setRecipeName("");
         setDirections("");
-    }
-
-    function renderRecipes () {
-        // 
     }
     
     return (
@@ -59,12 +57,14 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
                                 //console.log(recipe)
                                 return (<Recipe 
                                             user={user}
+                                            key={recipe.id}
                                             recipeBookID={recipeBookID}
                                             name={recipe.name} 
                                             recipeID={recipe.id} 
                                             directions={recipe.directions}
                                             recipe={recipe}
                                             updateRecipe={updateRecipe}
+                                            patchRecipe={patchRecipe}
                                         />)})
                             ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
                     <button type="button" onClick={(e) => setOpen(!open)}>{open ? ("up Chevron") : ("Add a Recipe!") }</button>

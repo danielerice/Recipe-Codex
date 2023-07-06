@@ -17,14 +17,10 @@ function App() {
   const [recipes, setRecipes] = useState([]);
   const [errors, setErrors] = useState();
   
-  console.log("errors:", errors)
-  
   async function autoLogin ( ) {
     const response = await fetch("/me")
     const userLogin = await response.json()
-    console.log("response:", response)
     if (response.status === 200) {
-      console.log("in auto login:",userLogin)
       setUser(userLogin)
     } else {
       setErrors(userLogin)
@@ -34,7 +30,6 @@ function App() {
     const res = await fetch("/recipe_books")
     const books = await res.json()
     if (res.status === 200) {
-      console.log("in fetch books:",books)
       setRecipeBooks(books)
     } else {
       setErrors(books)
@@ -42,24 +37,23 @@ function App() {
   
   useEffect(() => {
     // auto-login
-    console.log("autoLogin")
     autoLogin();
     getBooks();
 
     }, []);
 
-  function updateRecipe (action, token, token2) {
-    if (action === "delete") {
+  function updateRecipe ( token, token2 ) {
+
       //finds and deletes the  in state recipe in the user's recipe array
-      const newRecipes = user.recipes.filter((recipe) => recipe.id !== token)
-      const updatedUser = user
+      let newRecipes = user.recipes.filter((recipe) => recipe.id !== token)
+      let updatedUser = user
       updatedUser.recipes = newRecipes
       
       //finds and deletes the in state recipe from the corresponding recipe book
       const updatedBooks = recipeBooks.map((book) => {
         if (book.id === token2) {
-          const filteredBooks = book.recipes.filter((recipe) => recipe.id !== token)
-          const finishedBook = book
+          let filteredBooks = book.recipes.filter((recipe) => recipe.id !== token)
+          let finishedBook = book
           finishedBook.recipes = filteredBooks
           return finishedBook
         } else {return book}
@@ -67,7 +61,66 @@ function App() {
 
       setRecipeBooks(updatedBooks)
       setUser(updatedUser)
-    }
+  }
+
+  async function patchRecipe (formData, token, token2) {
+    console.log("form data:", formData)
+    const configObj = {
+      method: "PATCH",
+      headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+      },
+      body: JSON.stringify(formData),
+      };
+      const response = await fetch(`/recipes/${token}`, configObj)
+      const patchedRecipe = await response.json();
+      
+      if (response.status === 200) {
+        //finds and changes the target recipe in the user obj in state
+        let updatedUserRecipes = user.recipes.map((recipe) => {
+          if (recipe.id === token) {
+            return patchedRecipe
+          } else {return recipe}
+        })
+        let updatedUser = user
+        updatedUser.recipes = updatedUserRecipes
+
+        //finds and changes the target recipe in the recipeBook obj in state
+        let updatedBooks = recipeBooks.map((book) => {
+          if (book.id === token2) {
+            let updatedBook = book.recipes.map((recipe) => {
+              if (recipe.id === token) {
+                return patchedRecipe
+              } else {return recipe}
+            })
+          } else {return book}
+        })
+
+        setUser(updatedUser)
+        setRecipeBooks(updatedBooks)
+      } else {
+        setErrors(patchedRecipe)
+      }
+
+  }
+
+  function updateRecipeBooks (newRecipeBook) {
+    //updates recipeBooks obj with new recipe in state
+    console.log(newRecipeBook)
+    let updatedBooks = recipeBooks.map((book) => {
+      if (book.id === newRecipeBook.id) {
+        return newRecipeBook
+      } else {return book}
+    })
+    setRecipeBooks(updatedBooks)
+  }
+
+  function updateUser (newRecipe) {
+    //updates user obj with new recipe in state
+    let updatedUser = user
+    updatedUser.recipes.push(newRecipe)
+    setUser(updatedUser)
   }
   
 
@@ -90,6 +143,9 @@ function App() {
               errors={errors}
               setErrors={setErrors}
               updateRecipe={updateRecipe}
+              patchRecipe={patchRecipe}
+              updateRecipeBooks={updateRecipeBooks}
+              updateUser={updateUser}
               />
           }
           ></Route>
@@ -123,6 +179,7 @@ function App() {
               key={'myRecipes'}
               user={user}
               updateRecipe={updateRecipe}
+              patchRecipe={patchRecipe}
               />
             }
           ></Route>
