@@ -39,6 +39,7 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
             newRecipeBook.recipes.push(newRecipe)
             updateRecipeBooks(newRecipeBook)
             updateUser(newRecipe)
+            setErrors(null)
           } else {
             setErrors(newRecipe)
             console.log(newRecipe)
@@ -50,6 +51,7 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
     
     return (
                 <div id={recipeBookID} className="bookCard">
+                    { errors ? <div className="errorMessage"><p>{errors.errors[0]}</p></div> : <></>}
                     <h2>{name}</h2>
                     <i>{description}</i>
                         { recipeBook.recipes.length > 0 ? (
@@ -67,7 +69,7 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
                                             patchRecipe={patchRecipe}
                                         />)})
                             ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
-                    <button type="button" onClick={(e) => setOpen(!open)}>{open ? ("up Chevron") : ("Add a Recipe!") }</button>
+                    <button type="button" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
                     {open && <div className="content">
                                 <div className="newRecipeCard">
                                     <form onSubmit={postNewRecipe}>

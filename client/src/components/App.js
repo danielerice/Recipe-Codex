@@ -11,12 +11,12 @@ import MyRecipeBooks from "./MyRecipeBooks"
 
 
 function App() {
-  
+
   const [user, setUser] = useState(null);
   const [recipeBooks, setRecipeBooks] = useState("")
   const [recipes, setRecipes] = useState([]);
   const [errors, setErrors] = useState();
-  
+  console.log("in app errors:", errors)
   async function autoLogin ( ) {
     const response = await fetch("/me")
     const userLogin = await response.json()
@@ -64,7 +64,7 @@ function App() {
   }
 
   async function patchRecipe (formData, token, token2) {
-    console.log("form data:", formData)
+    console.log("form data:", token2)
     const configObj = {
       method: "PATCH",
       headers: {
@@ -89,17 +89,22 @@ function App() {
         //finds and changes the target recipe in the recipeBook obj in state
         let updatedBooks = recipeBooks.map((book) => {
           if (book.id === token2) {
-            let updatedBook = book.recipes.map((recipe) => {
+            let updatedRecipes = book.recipes.map((recipe) => {
               if (recipe.id === token) {
                 return patchedRecipe
               } else {return recipe}
             })
+            let updatedBook = book
+            updatedBook.recipes = updatedRecipes
+            return updatedBook
           } else {return book}
         })
-
+        console.log("in update recipe: user:", updatedUser, "updated Books:", updatedBooks)
         setUser(updatedUser)
         setRecipeBooks(updatedBooks)
+        setErrors(null)
       } else {
+        console.log("in patched errors:", patchedRecipe)
         setErrors(patchedRecipe)
       }
 
@@ -124,7 +129,7 @@ function App() {
   }
   
 
-  if (!user) return <Login user={user} setUser={setUser} setErrors={setErrors}/>;
+  if (!user) return <Login user={user} setUser={setUser} setErrors={setErrors} errors={errors}/>;
   if (recipeBooks) {
     return (
       <div>
@@ -180,6 +185,7 @@ function App() {
               user={user}
               updateRecipe={updateRecipe}
               patchRecipe={patchRecipe}
+              errors={errors}
               />
             }
           ></Route>

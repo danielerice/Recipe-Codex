@@ -1,19 +1,19 @@
 import React, {useState} from "react";
 
 
-function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recipeBookID, myRecipes, patchRecipe}) {
-
+function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recipeBookID, myRecipes, patchRecipe, errors}) {
+    console.log("in recipe errors:", errors)
     const [form, setForm] = useState(false);
     const [recipeName, setRecipeName] = useState(name);
     const [recipeDirections, setRecipeDirections] = useState(directions);
 
     function deleteRecipe (e) {
         fetch(`/recipes/${recipeID}`, { method: "DELETE" })
-        updateRecipe(recipeID, recipe.user_id)
+        updateRecipe(recipeID, recipe.recipe_book_id)
     }
 
     function patchForm (e) {
-        setForm(true)
+        setForm(!form)
         console.log(form)
     }
 
@@ -25,11 +25,13 @@ function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recip
             "directions": recipeDirections
             };
 
-        patchRecipe(formData, recipeID, recipeBookID)
+        patchRecipe(formData, recipeID, recipe.recipe_book_id)
     }
     if (form) {
         return (
                 <div className="patchRecipeCard">
+                    { errors ? <div className="errorMessage"><p>{errors.errors}</p></div> : <p></p>}
+                    <button id="done" onClick={(e) => patchForm()}>done</button>
                     <form onSubmit={sendRecipe}>
                         <label>Name: </label>
                         <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
@@ -43,6 +45,7 @@ function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recip
     if (!form) {
 
         return (<div key={recipeID} className="card">
+                    { errors ? <div className="errorMessage"><p>{errors.errors}</p></div> : <p></p>}
                     <h3>{name}</h3>
                     {user.id === recipe.user_id ?  <button className="delete" onClick={(e) => deleteRecipe(e)}>x</button> : <></> }
                     {myRecipes ?  <button className="update" onClick={(e) => patchForm()}>edit</button> : <></> }

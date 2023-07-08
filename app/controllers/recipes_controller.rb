@@ -19,8 +19,12 @@ class RecipesController < ApplicationController
     #PATCH /recipes/:id
     def update
         recipe = Recipe.find(params[:id])
-        recipe.update(recipe_params)
-        render json: recipe, status: :ok
+        if recipe_params[:name].length>0 and recipe_params[:directions].length>0
+            recipe.update(recipe_params)
+            render json: recipe, status: :ok
+        else
+            render json: {errors: "Name and Directions can't be blank"}, status: :unprocessable_entity
+        end
     end
 
     #POST /recipes
@@ -46,6 +50,6 @@ class RecipesController < ApplicationController
     end
 
     def recipe_params
-        params.permit(:name, :directions, :user_id, :recipe_book_id)
+        params.permit(:name, :directions, :user_id, :recipe_book_id, :id)
     end
 end

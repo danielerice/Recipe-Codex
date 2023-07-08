@@ -2,8 +2,7 @@ import React, {} from "react";
 import Recipe from "./Recipe"
 
 
-function MyRecipes ({ user, setUser, updateRecipe, patchRecipe }) {
-
+function MyRecipes ({ user, setUser, updateRecipe, patchRecipe, errors }) {
     const myRecipes = true;
 
     return (
@@ -20,6 +19,7 @@ function MyRecipes ({ user, setUser, updateRecipe, patchRecipe }) {
                 recipe={recipe}
                 updateRecipe={updateRecipe}
                 patchRecipe={patchRecipe}
+                errors={errors}
                 />
             })}
         </div>

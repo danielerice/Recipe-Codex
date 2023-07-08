@@ -2,13 +2,14 @@ import React, {} from "react";
 import RecipeBook from "./RecipeBook"
 
 
-function MyRecipeBooks ({ user }) {
+function MyRecipeBooks ({ user, errors }) {
 
 
     //console.log(user.recipe_books)
     return (
         <div>
         <div className="center">
+            
             {user.recipe_books.map((recipeBook) => {
                 return <RecipeBook
                 user={user} 

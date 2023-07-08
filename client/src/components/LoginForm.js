@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 
-function LoginForm({ setUser, setErrors }) {
+function LoginForm({ setUser, setErrors, errors }) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -28,7 +28,9 @@ function LoginForm({ setUser, setErrors }) {
         
         if (response.status === 201) {
           setUser(newLogin)
+          setErrors(null)
         } else {
+          console.log(newLogin)
           setErrors(newLogin)
         }
     }

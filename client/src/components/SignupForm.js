@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-  function SignupForm({ setUser }) {
+  function SignupForm({ setUser, setErrors }) {
       const [username, setUsername] = useState("");
       const [name, setName] = useState("");
       const [password, setPassword] = useState("");
@@ -27,8 +27,14 @@ import React, { useState } from "react";
             };
         
         const response = await fetch(`/signup`, configObj)
-        const newUser = await response.json(); // error handling
-        console.log(newUser)
+        const newUser = await response.json();
+
+        if (response.status === 201) {
+          setErrors(null)
+        } else {
+          setErrors(newUser)
+        }
+          
         setName("");
         setUsername("");
         setPassword("");
