@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {UserContext} from '../contexts/UserContext'
 
 
-function LoginForm({ setUser, setErrors, errors }) {
+function LoginForm({ setErrors, errors }) {
+    
+    const {setUser} = useContext(UserContext);
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,7 +16,6 @@ function LoginForm({ setUser, setErrors, errors }) {
           "username": username,
           "password": password
           };
-        //console.log(formData)
         const configObj = {
           method: "POST",
           headers: {
@@ -28,34 +30,33 @@ function LoginForm({ setUser, setErrors, errors }) {
         
         if (response.status === 201) {
           setUser(newLogin)
-          setErrors(null)
+          //setErrors(null)
         } else {
-          console.log(newLogin)
-          setErrors(newLogin)
+          alert(newLogin.errors)
         }
     }
 
   return (
     <div className="formContainer">
-    <form onSubmit={handleLogin}>
-      <label>Username:</label>
-      <input
-        type="text"
-        id="name"
-        autoComplete="off"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <label>Password:</label>
-      <input
-        type="password"
-        id="name"
-        autoComplete="off"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <input type="submit" value="Login"></input>
-    </form>
+      <form onSubmit={handleLogin}>
+        <label>Username:</label>
+          <input
+            type="text"
+            id="name"
+            autoComplete="off"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+        <label>Password:</label>
+          <input
+            type="password"
+            id="password"
+            autoComplete="off"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        <input type="submit" value="Login"></input>
+      </form>
     </div>
     
   );

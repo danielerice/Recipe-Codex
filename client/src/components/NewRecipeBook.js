@@ -1,14 +1,14 @@
 import React, {useState} from "react";
 
 
-function NewRecipeBook ({ user, recipeBooks, setRecipeBooks, errors, setErrors }) {
+function NewRecipeBook ({ recipeBooks, setRecipeBooks, errors, setErrors }) {
 
         const [name, setName] = useState("")
         const [description, setDescription] = useState("")
 
         async function postNewRecipeBook (e) {
             e.preventDefault()
-            //console.log(name, description)
+
             const formData = {
                 "name": name,
                 "description": description
@@ -23,17 +23,16 @@ function NewRecipeBook ({ user, recipeBooks, setRecipeBooks, errors, setErrors }
                 };
                 
             const response = await fetch(`/recipe_books`, configObj)
-            const newBook = await response.json(); // error handling
-            console.log(newBook)
+            const newBook = await response.json();
 
+            //response error handling
             if (response.status === 201) {
                 const updatedBooks = [...recipeBooks]
                 updatedBooks.push(newBook)
                 setRecipeBooks(updatedBooks)
                 setErrors(null)
               } else {
-                setErrors(newBook)
-                console.log(newBook)
+                alert(newBook.errors)
               }
 
             setName("");

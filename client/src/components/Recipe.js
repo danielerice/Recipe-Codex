@@ -1,20 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import {UserContext} from "../contexts/UserContext"
 
 
-function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recipeBookID, myRecipes, patchRecipe, errors}) {
-    console.log("in recipe errors:", errors)
+function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecipe, errors}) {
+    
+    const {user} = useContext(UserContext);
     const [form, setForm] = useState(false);
     const [recipeName, setRecipeName] = useState(name);
     const [recipeDirections, setRecipeDirections] = useState(directions);
 
     function deleteRecipe (e) {
-        fetch(`/recipes/${recipeID}`, { method: "DELETE" })
-        updateRecipe(recipeID, recipe.recipe_book_id)
+        fetch(`/recipes/${recipe.id}`, { method: "DELETE" })
+        updateRecipe(recipe.id, recipe.recipe_book_id)
     }
 
     function patchForm (e) {
         setForm(!form)
-        console.log(form)
     }
 
     function sendRecipe (e) {
@@ -25,7 +26,7 @@ function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recip
             "directions": recipeDirections
             };
 
-        patchRecipe(formData, recipeID, recipe.recipe_book_id)
+        patchRecipe(formData, recipe.id, recipe.recipe_book_id)
     }
     if (form) {
         return (
@@ -44,7 +45,7 @@ function Recipe ({ directions, name, recipeID, user, recipe, updateRecipe, recip
     }
     if (!form) {
 
-        return (<div key={recipeID} className="card">
+        return (<div key={recipe.id} className="card">
                     { errors ? <div className="errorMessage"><p>{errors.errors}</p></div> : <p></p>}
                     <h3>{name}</h3>
                     {user.id === recipe.user_id ?  <button className="delete" onClick={(e) => deleteRecipe(e)}>x</button> : <></> }

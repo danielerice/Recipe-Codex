@@ -2,7 +2,6 @@ class RecipesController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
-    #before_action :authorize
 
     #GET /recipes
     def index

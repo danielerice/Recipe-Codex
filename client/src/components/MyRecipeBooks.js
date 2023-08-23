@@ -1,27 +1,28 @@
-import React, {} from "react";
-import RecipeBook from "./RecipeBook"
+import React, { useEffect, useState, useContext } from "react";
+import RecipeBook from './RecipeBook'
+import {UserContext} from "../contexts/UserContext"
 
+function MyRecipeBooks ({ recipeBooks, updateRecipe, patchRecipe, updateUser, updateRecipeBooks }) {
 
-function MyRecipeBooks ({ user, errors }) {
+    const {user} = useContext(UserContext);
 
-
-    //console.log(user.recipe_books)
-    return (
-        <div>
-        <div className="center">
-            
+return (
+    <div>
+        <div className="home">
             {user.recipe_books.map((recipeBook) => {
+
                 return <RecipeBook
-                user={user} 
-                name={recipeBook.name} 
-                recipeBookID={recipeBook.id} 
-                description={recipeBook.description}
-                />
+                            recipeBook={recipeBook}
+                            key={recipeBook.id}
+                            userID={user.id}
+                            patchRecipe={patchRecipe}
+                            updateUser={updateUser}
+                            updateRecipeBooks={updateRecipeBooks}
+                        />
             })}
         </div>
     </div>
-
-    )
+)
 }
 
 export default MyRecipeBooks;

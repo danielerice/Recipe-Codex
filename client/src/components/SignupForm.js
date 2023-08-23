@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 
 
-  function SignupForm({ setUser, setErrors }) {
+  function SignupForm({ setErrors }) {
       const [username, setUsername] = useState("");
       const [name, setName] = useState("");
       const [password, setPassword] = useState("");
@@ -32,7 +32,7 @@ import React, { useState } from "react";
         if (response.status === 201) {
           setErrors(null)
         } else {
-          setErrors(newUser)
+          alert(newUser.errors)
         }
           
         setName("");
@@ -44,41 +44,41 @@ import React, { useState } from "react";
 
     return (
       <div className="formContainer">
-      <form onSubmit={handleNewUser}>
-        <label>Name:</label>
-        <input
-          type="text"
-          id="name"
-          autoComplete="off"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <label>Username:</label>
-        <input
-          type="text"
-          id="username"
-          autoComplete="off"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          id="password"
-          autoComplete="off"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <label>Confirm Password:</label>
-        <input
-          type="password"
-          id="cofrimPassword"
-          autoComplete="off"
-          value={confirmPassowrd}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        <input type="submit" value="Create Account"></input>
-        </form>
+        <form onSubmit={handleNewUser}>
+          <label>Name:</label>
+            <input
+              type="text"
+              id="name"
+              autoComplete="off"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          <label>Username:</label>
+            <input
+              type="text"
+              id="username"
+              autoComplete="off"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+          <label>Password:</label>
+            <input
+              type="password"
+              id="password"
+              autoComplete="off"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          <label>Confirm Password:</label>
+            <input
+              type="password"
+              id="cofrimPassword"
+              autoComplete="off"
+              value={confirmPassowrd}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+          <input type="submit" value="Create Account"></input>
+          </form>
         </div>
     )};
 

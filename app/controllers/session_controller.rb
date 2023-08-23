@@ -2,6 +2,7 @@ class SessionController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :unprocessable_entity_response
     rescue_from ActiveRecord::RecordNotFound, with: :record_not_found_response
 
+    skip_before_action :authorize
 
     #POST /login
     def create

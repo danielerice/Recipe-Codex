@@ -9,15 +9,14 @@ function NewRecipe ({ user }) {
     const exampleText = "Ingredients: \n2.5oz Gin\n.25oz Brine\n1 Olive\nDirections:\nPut all the ingredients in a cocktail mixer and stir until the extrior has condensated"
     
    
-    async function postNewRecipe (e) {
+    function postNewRecipe (e) {
         //post to /recipes
         e.preventDefault()
-        //console.log(name, directions)
+
         const formData = {
             "name": name,
             "directions": directions,
-            "user_id": user.id,
-            //"recipe_book_id": recipe_book_id
+            "user_id": user.id
             };
         const configObj = {
             method: "POST",
@@ -28,9 +27,7 @@ function NewRecipe ({ user }) {
             body: JSON.stringify(formData),
             };
             
-        const response = await fetch(`/recipes`, configObj);
-        const newRecipe = await response.json(); // error handling
-        //console.log(newRecipe)
+        fetch(`/recipes`, configObj);
         setName("");
         setDirections("")
     }

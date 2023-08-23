@@ -1,26 +1,27 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Recipe from "./Recipe";
-import NewRecipe from "./NewRecipe";
+import {UserContext} from "../contexts/UserContext"
 
 
-function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, recipeBook, setErrors, errors, patchRecipe, updateRecipeBooks, updateUser }) {
+function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks, updateUser}) {
 
+    const {user} = useContext(UserContext);
     const [open, setOpen] = useState(false);
-    const [recipeName, setRecipeName] = useState("")
-    const [directions, setDirections] = useState("")
+    const [recipeName, setRecipeName] = useState("");
+    const [directions, setDirections] = useState("");
 
     const exampleText = "Ingredients: \n2.5oz Gin\n.25oz Brine\n1 Olive\nDirections:\nPut all the ingredients in a cocktail mixer and stir until the extrior has condensated"
-    
-   
+
+
     async function postNewRecipe (e) {
         //post to /recipes
         e.preventDefault()
-        //console.log(name, directions)
+        
         const formData = {
             "name": recipeName,
             "directions": directions,
             "user_id": user.id,
-            "recipe_book_id": recipeBookID
+            "recipe_book_id": recipeBook.id
             };
         const configObj = {
             method: "POST",
@@ -32,17 +33,15 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
             };
             
         const response = await fetch(`/recipes`, configObj);
-        const newRecipe = await response.json(); // error handling
+        const newRecipe = await response.json();
 
         if (response.status === 201) {
             let newRecipeBook = recipeBook
             newRecipeBook.recipes.push(newRecipe)
             updateRecipeBooks(newRecipeBook)
             updateUser(newRecipe)
-            setErrors(null)
           } else {
-            setErrors(newRecipe)
-            console.log(newRecipe)
+            alert(newRecipe.errors)
           }
         
         setRecipeName("");
@@ -50,17 +49,15 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
     }
     
     return (
-                <div id={recipeBookID} className="bookCard">
-                    { errors ? <div className="errorMessage"><p>{errors.errors[0]}</p></div> : <></>}
-                    <h2>{name}</h2>
-                    <i>{description}</i>
+                <div id={recipeBook.id} className="bookCard">
+
+                    {recipeBook.name ? (<h2>{recipeBook.name}</h2>) : (<h2>Recipe Name</h2>)}
+                    {recipeBook.description ? (<i>{recipeBook.description}</i>) : (<i>description</i>)}
                         { recipeBook.recipes.length > 0 ? (
                             recipeBook.recipes.map((recipe) => {
-                                //console.log(recipe)
                                 return (<Recipe 
-                                            user={user}
                                             key={recipe.id}
-                                            recipeBookID={recipeBookID}
+                                            recipeBookID={recipeBook.id}
                                             name={recipe.name} 
                                             recipeID={recipe.id} 
                                             directions={recipe.directions}
@@ -74,9 +71,9 @@ function RecipeBook ({ user, updateRecipe, recipeBookID, description, name, reci
                                 <div className="newRecipeCard">
                                     <form onSubmit={postNewRecipe}>
                                         <label>Name: </label>
-                                        <input id="name" type="text" placeholder="This is an example!" onChange={(e) => setRecipeName(e.target.value)}></input>
+                                        <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
                                         <label>Directions:</label>
-                                        <textarea id="directions" type="input" placeholder={exampleText} onChange={(e) => setDirections(e.target.value)}></textarea>
+                                        <textarea id="directions" type="input" placeholder={exampleText} value={directions} onChange={(e) => setDirections(e.target.value)}></textarea>
                                         <button type="submit" >Submit</button>
                                     </form>
                                 </div>

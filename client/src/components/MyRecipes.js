@@ -1,9 +1,11 @@
-import React, {} from "react";
+import React, {useContext} from "react";
 import Recipe from "./Recipe"
+import {UserContext} from "../contexts/UserContext"
 
 
-function MyRecipes ({ user, setUser, updateRecipe, patchRecipe, errors }) {
+function MyRecipes ({ updateRecipe, patchRecipe, errors }) {
     const myRecipes = true;
+    const {user} = useContext(UserContext);
 
     return (
         <div>
@@ -12,7 +14,6 @@ function MyRecipes ({ user, setUser, updateRecipe, patchRecipe, errors }) {
                 return <Recipe
                 key={recipe.id}
                 myRecipes={myRecipes} 
-                user={user}
                 name={recipe.name} 
                 recipeID={recipe.id} 
                 directions={recipe.directions}
