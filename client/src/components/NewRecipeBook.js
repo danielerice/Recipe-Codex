@@ -1,8 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import {UserContext} from "../contexts/UserContext"
 
 
-function NewRecipeBook ({ recipeBooks, setRecipeBooks, errors, setErrors }) {
+function NewRecipeBook ({ recipeBooks, setRecipeBooks}) {
 
+        const {user, setUser} = useContext(UserContext);
         const [name, setName] = useState("")
         const [description, setDescription] = useState("")
 
@@ -22,7 +24,7 @@ function NewRecipeBook ({ recipeBooks, setRecipeBooks, errors, setErrors }) {
                 body: JSON.stringify(formData),
                 };
                 
-            const response = await fetch(`/recipe_books`, configObj)
+            const response = await fetch(`/recipe_books`, configObj);
             const newBook = await response.json();
 
             //response error handling
@@ -30,7 +32,6 @@ function NewRecipeBook ({ recipeBooks, setRecipeBooks, errors, setErrors }) {
                 const updatedBooks = [...recipeBooks]
                 updatedBooks.push(newBook)
                 setRecipeBooks(updatedBooks)
-                setErrors(null)
               } else {
                 alert(newBook.errors)
               }

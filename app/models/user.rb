@@ -6,4 +6,8 @@ class User < ApplicationRecord
     validates :username, presence: true
     validates :username, uniqueness: true
     validates :name, presence: true
+
+    def my_recipe_books
+        self.recipe_books.uniq
+    end
 end

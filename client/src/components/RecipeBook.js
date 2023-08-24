@@ -53,7 +53,7 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
 
                     {recipeBook.name ? (<h2>{recipeBook.name}</h2>) : (<h2>Recipe Name</h2>)}
                     {recipeBook.description ? (<i>{recipeBook.description}</i>) : (<i>description</i>)}
-                        { recipeBook.recipes.length > 0 ? (
+                        { recipeBook.recipes ? (
                             recipeBook.recipes.map((recipe) => {
                                 return (<Recipe 
                                             key={recipe.id}
