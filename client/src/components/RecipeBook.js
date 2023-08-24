@@ -66,7 +66,7 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
                                             patchRecipe={patchRecipe}
                                         />)})
                             ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
-                    <button type="button" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
+                    <button type="button" className="add" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
                     {open && <div className="content">
                                 <div className="newRecipeCard">
                                     <form onSubmit={postNewRecipe}>

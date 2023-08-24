@@ -45,7 +45,6 @@ function NewRecipeBook ({ recipeBooks, setRecipeBooks}) {
         return (
             <div className="center">
             <div className="newRecipeCard">
-            { errors ? <div className="errorMessage"><p>{errors.errors}</p></div> : <p></p>}
                 <form onSubmit={postNewRecipeBook}>
                     <label>Name:</label>
                     <input type="text" id="textinput" placeholder="This is an example!" onChange={(e) => setName(e.target.value)} value={name}></input>
