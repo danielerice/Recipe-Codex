@@ -1,10 +1,12 @@
 import React, {useState, useContext} from "react";
-import {UserContext} from "../contexts/UserContext"
+import { RecipeBookContext } from "../contexts/RecipeBookContext";
+//import {UserContext} from "../contexts/UserContext"
 
 
-function NewRecipeBook ({ recipeBooks, setRecipeBooks}) {
+function NewRecipeBook () {
 
-        const {user, setUser} = useContext(UserContext);
+        const {recipeBooks, setRecipeBooks} = useContext(RecipeBookContext);
+        //const {user, setUser} = useContext(UserContext);
         const [name, setName] = useState("")
         const [description, setDescription] = useState("")
 
@@ -19,7 +21,7 @@ function NewRecipeBook ({ recipeBooks, setRecipeBooks}) {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "Accept": "application/json",
+                    "Accept": "application/json"
                 },
                 body: JSON.stringify(formData),
                 };

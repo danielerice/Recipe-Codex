@@ -3,7 +3,7 @@ import Recipe from "./Recipe"
 import {UserContext} from "../contexts/UserContext"
 
 
-function MyRecipes ({ updateRecipe, patchRecipe, errors }) {
+function MyRecipes ({ updateRecipe, patchRecipe }) {
     const myRecipes = true;
     const {user} = useContext(UserContext);
 
@@ -20,7 +20,6 @@ function MyRecipes ({ updateRecipe, patchRecipe, errors }) {
                 recipe={recipe}
                 updateRecipe={updateRecipe}
                 patchRecipe={patchRecipe}
-                errors={errors}
                 />
             })}
         </div>

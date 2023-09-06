@@ -1,14 +1,18 @@
-import React, {} from "react";
+import React, { useContext } from "react";
+import { RecipeBookContext } from "../contexts/RecipeBookContext";
 import RecipeBook from "./RecipeBook"
 
 
-function Home ({ updateRecipe, recipeBooks, setRecipeBooks, patchRecipe, updateUser, updateRecipeBooks }) {
+function Home ({ updateRecipe, patchRecipe, updateUser, updateRecipeBooks }) {
+
+    const {recipeBooks} = useContext(RecipeBookContext);
 
     return (
         <div>
         <div className="home">
             {recipeBooks.map((recipeBook) => {
                 return <RecipeBook
+                            isHome={true}
                             recipeBook={recipeBook} 
                             key={recipeBook.id}
                             updateRecipe={updateRecipe}

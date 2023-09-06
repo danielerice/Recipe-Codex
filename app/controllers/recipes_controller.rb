@@ -17,14 +17,10 @@ class RecipesController < ApplicationController
 
     #PATCH /recipes/:id
     def update
-        recipe = Recipe.find(params[:id])
-        # if recipe_params[:name].length>0 and recipe_params[:directions].length>0
-        #     recipe.update(recipe_params)
-        #     render json: recipe, status: :ok
-        # else
-        #     render json: {errors: "Name and Directions can't be blank"}, status: :unprocessable_entity
-        # end
+        user = User.find(session[:user_id])
+        recipe = user.recipes.find(params[:id])
         recipe.update!(recipe_params)
+        render json: recipe, status: :ok
     end
 
     #POST /recipes
@@ -35,7 +31,8 @@ class RecipesController < ApplicationController
 
     #DELETE /recipes/:id
     def destroy
-        recipe = Recipe.find(params[:id])
+        user = User.find(session[:user_id])
+        recipe = user.recipes.find(params[:id])
         recipe.destroy
         head :no_content
     end

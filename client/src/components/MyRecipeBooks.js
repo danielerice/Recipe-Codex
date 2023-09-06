@@ -14,7 +14,7 @@ return (
                 return <RecipeBook
                             recipeBook={recipeBook}
                             key={recipeBook.id}
-                            userID={user.id}
+                            isHome={false}
                             patchRecipe={patchRecipe}
                             updateUser={updateUser}
                             updateRecipeBooks={updateRecipeBooks}

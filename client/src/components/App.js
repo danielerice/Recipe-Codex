@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import {UserContext} from "../contexts/UserContext"
+import { RecipeBookContext } from "../contexts/RecipeBookContext";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "./Login";
@@ -13,8 +14,8 @@ import MyRecipeBooks from "./MyRecipeBooks"
 function App() {
 
   const {user, setUser} = useContext(UserContext);
-  const [recipeBooks, setRecipeBooks] = useState("");
-  const [errors, setErrors] = useState();
+  const {recipeBooks, setRecipeBooks} = useContext(RecipeBookContext);
+
 
   
   async function getBooks ( ) {
@@ -24,7 +25,7 @@ function App() {
     
     if (res.status === 200) {
       setRecipeBooks(books)
-    } else {
+    } else if (res.status ==! 401) {
       alert(books.errors)
     }};
   
@@ -99,7 +100,6 @@ function App() {
       
       setUser(updatedUser)
       setRecipeBooks(updatedBooks)
-      setErrors(null)
     } else {
       alert(patchedRecipe.errors)
     }
@@ -129,7 +129,7 @@ function App() {
   };
   
 //returns site if user and recipeBooks are true else, returns Loading... or Login
-  if (!user) return <Login user={user} setUser={setUser} setErrors={setErrors} errors={errors}/>;
+  if (!user) return <Login user={user} setUser={setUser}/>;
   if (recipeBooks) {
     return (
       <div>

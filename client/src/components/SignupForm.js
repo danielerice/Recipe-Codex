@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import {UserContext} from "../contexts/UserContext"
 
 
 
-  function SignupForm({ setErrors }) {
+  function SignupForm() {
+
+      const {user, setUser} = useContext(UserContext);
       const [username, setUsername] = useState("");
       const [name, setName] = useState("");
       const [password, setPassword] = useState("");
@@ -30,7 +33,7 @@ import React, { useState } from "react";
         const newUser = await response.json();
 
         if (response.status === 201) {
-          setErrors(null)
+          setUser(newUser)
         } else {
           alert(newUser.errors)
         }

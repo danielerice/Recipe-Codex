@@ -3,14 +3,31 @@ import Recipe from "./Recipe";
 import {UserContext} from "../contexts/UserContext"
 
 
-function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks, updateUser}) {
+function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks, updateUser, isHome}) {
 
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
     const [open, setOpen] = useState(false);
     const [recipeName, setRecipeName] = useState("");
     const [directions, setDirections] = useState("");
 
     const exampleText = "Ingredients: \n2.5oz Gin\n.25oz Brine\n1 Olive\nDirections:\nPut all the ingredients in a cocktail mixer and stir until the extrior has condensated"
+
+    function updateMyRecipeBooks (recipeBookID) {
+        let bookIDArr = []
+        user.my_recipe_books.forEach((book) => {
+            bookIDArr.push(book.id)
+        })
+        let newBook = bookIDArr.includes(recipeBookID)
+        
+        if (!newBook) {
+
+            let updatedUser = user.my_recipe_books.push(recipeBook)
+            
+            setUser(updatedUser);
+        }
+
+    }
+
 
 
     async function postNewRecipe (e) {
@@ -38,6 +55,7 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
         if (response.status === 201) {
             let newRecipeBook = recipeBook
             newRecipeBook.recipes.push(newRecipe)
+            updateMyRecipeBooks(recipeBook.id)
             updateRecipeBooks(newRecipeBook)
             updateUser(newRecipe)
           } else {
@@ -53,7 +71,7 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
 
                     {recipeBook.name ? (<h2>{recipeBook.name}</h2>) : (<h2>Recipe Name</h2>)}
                     {recipeBook.description ? (<i>{recipeBook.description}</i>) : (<i>description</i>)}
-                        { recipeBook.recipes ? (
+                        { recipeBook.recipes && isHome ? (
                             recipeBook.recipes.map((recipe) => {
                                 return (<Recipe 
                                             key={recipe.id}

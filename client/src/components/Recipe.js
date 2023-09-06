@@ -1,10 +1,11 @@
 import React, {useState, useContext} from "react";
 import {UserContext} from "../contexts/UserContext"
+import RecipeBook from "./RecipeBook";
 
 
-function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecipe, errors}) {
+function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecipe}) {
     
-    const {user} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
     const [form, setForm] = useState(false);
     const [recipeName, setRecipeName] = useState(name);
     const [recipeDirections, setRecipeDirections] = useState(directions);
@@ -12,6 +13,20 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
     function deleteRecipe (e) {
         fetch(`/recipes/${recipe.id}`, { method: "DELETE" })
         updateRecipe(recipe.id, recipe.recipe_book_id)
+
+        let isUniq = true;
+        console.log("target", recipe.recipe_book_id)
+        user.recipes.map((userRecipe) => {
+            if (recipe.recipe_book_id === userRecipe.recipe_book_id && recipe.id !== userRecipe.id) {
+                isUniq = false;
+            } else {console.log('user recipe id', userRecipe.recipe_book_id)}
+        })
+        if(isUniq){
+            let updatedRecipeBooks = user.my_recipe_books.filter((recipeBook) => recipeBook.id !== recipe.recipe_book_id)
+            let updatedUser = user
+            updatedUser.my_recipe_books = updatedRecipeBooks
+            setUser(updatedUser)
+        }
     }
 
     function patchForm (e) {
@@ -31,7 +46,6 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
     if (form) {
         return (
                 <div className="patchRecipeCard">
-                    { errors ? <div className="errorMessage"><p>{errors.errors}</p></div> : <p></p>}
                     <button id="done" onClick={(e) => patchForm()}>done</button>
                     <form onSubmit={sendRecipe}>
                         <label>Name: </label>
@@ -46,7 +60,6 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
     if (!form) {
 
         return (<div key={recipe.id} className="card">
-                    { errors ? <div className="errorMessage"><p>{errors.errors}</p></div> : <p></p>}
                     <h3>{name}</h3>
                     {user.id === recipe.user_id ?  <button className="delete" onClick={(e) => deleteRecipe(e)}>x</button> : <></> }
                     {myRecipes ?  <button className="update" onClick={(e) => patchForm()}>edit</button> : <></> }

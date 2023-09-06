@@ -8,12 +8,12 @@ class RecipeBooksController < ApplicationController
         render json: RecipeBook.all
     end
 
-    #GET /recipe_book/:id
-    #unused
-    def show
-        recipe_book = RecipeBook.find(params[:id])
-        render json: recipe_book, status: :ok
-    end
+    # #GET /recipe_book/:id
+    # #unused
+    # def show
+    #     recipe_book = RecipeBook.find(params[:id])
+    #     render json: recipe_book, status: :ok
+    # end
 
     #PATCH /recipe_book/:id
     def update
