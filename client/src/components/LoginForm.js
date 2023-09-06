@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import {UserContext} from '../contexts/UserContext'
 
 
-function LoginForm({}) {
+function LoginForm() {
     
     const {setUser} = useContext(UserContext);
     const [username, setUsername] = useState("");

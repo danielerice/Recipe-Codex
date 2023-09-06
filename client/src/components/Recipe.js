@@ -1,7 +1,5 @@
 import React, {useState, useContext} from "react";
 import {UserContext} from "../contexts/UserContext"
-import RecipeBook from "./RecipeBook";
-
 
 function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecipe}) {
     
@@ -15,11 +13,11 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
         updateRecipe(recipe.id, recipe.recipe_book_id)
 
         let isUniq = true;
-        console.log("target", recipe.recipe_book_id)
+        
         user.recipes.map((userRecipe) => {
             if (recipe.recipe_book_id === userRecipe.recipe_book_id && recipe.id !== userRecipe.id) {
-                isUniq = false;
-            } else {console.log('user recipe id', userRecipe.recipe_book_id)}
+               return isUniq = false;
+            } else {return userRecipe}
         })
         if(isUniq){
             let updatedRecipeBooks = user.my_recipe_books.filter((recipeBook) => recipeBook.id !== recipe.recipe_book_id)

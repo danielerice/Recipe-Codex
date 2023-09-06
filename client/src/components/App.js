@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import {UserContext} from "../contexts/UserContext"
 import { RecipeBookContext } from "../contexts/RecipeBookContext";
 import { Route, Routes } from "react-router-dom";
@@ -15,28 +15,6 @@ function App() {
 
   const {user, setUser} = useContext(UserContext);
   const {recipeBooks, setRecipeBooks} = useContext(RecipeBookContext);
-
-
-  
-  async function getBooks ( ) {
-    //gets ALL books
-    const res = await fetch("/recipe_books")
-    const books = await res.json()
-    
-    if (res.status === 200) {
-      setRecipeBooks(books)
-    } else if (res.status ==! 401) {
-      alert(books.errors)
-    }};
-  
-  
-  useEffect(() => {
-    //sets books in state
-    getBooks();
-
-    }, []);
-
-  
   
   function updateRecipe ( token, token2 ) {
 

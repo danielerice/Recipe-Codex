@@ -5,7 +5,7 @@ import {UserContext} from "../contexts/UserContext"
 
   function SignupForm() {
 
-      const {user, setUser} = useContext(UserContext);
+      const {setUser} = useContext(UserContext);
       const [username, setUsername] = useState("");
       const [name, setName] = useState("");
       const [password, setPassword] = useState("");
