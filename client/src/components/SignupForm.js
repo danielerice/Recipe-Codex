@@ -29,7 +29,7 @@ import {UserContext} from "../contexts/UserContext"
             body: JSON.stringify(formData),
             };
         
-        const response = await fetch(`/signup`, configObj)
+        const response = await fetch(`localhost:3000/signup`, configObj)
         const newUser = await response.json();
 
         if (response.status === 201) {
