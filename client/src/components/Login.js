@@ -19,7 +19,7 @@ import LoginForm from "./LoginForm";
                     <div className="hero">
                         <LoginForm />
                         <p className="account">Don't have an account?</p>&nbsp;
-                        <button onClick={() => setNewUser(false)}>Sign Up</button>
+                        <button onClick={() => setNewUser(false)} className="bttn">Sign Up</button>
                     </div>
                 ) : (
                 <div className="hero">
