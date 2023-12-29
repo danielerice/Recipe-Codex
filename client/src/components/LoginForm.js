@@ -36,10 +36,11 @@ function LoginForm() {
     }
 
   return (
-    <div className="formContainer">
+    <div className="col-12">
       <form onSubmit={handleLogin}>
         <label>Username:</label>
           <input
+          className="form-control"
             type="text"
             id="name"
             autoComplete="off"
@@ -48,6 +49,7 @@ function LoginForm() {
           />
         <label>Password:</label>
           <input
+          className="form-control"
             type="password"
             id="password"
             autoComplete="off"

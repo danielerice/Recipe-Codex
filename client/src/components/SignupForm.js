@@ -46,10 +46,11 @@ import {UserContext} from "../contexts/UserContext"
     }
 
     return (
-      <div className="formContainer">
+      <div className="col-12">
         <form onSubmit={handleNewUser}>
           <label>Name:</label>
             <input
+              className="form-control"
               type="text"
               id="name"
               autoComplete="off"
@@ -58,6 +59,7 @@ import {UserContext} from "../contexts/UserContext"
             />
           <label>Username:</label>
             <input
+            className="form-control"
               type="text"
               id="username"
               autoComplete="off"
@@ -66,6 +68,7 @@ import {UserContext} from "../contexts/UserContext"
             />
           <label>Password:</label>
             <input
+            className="form-control"
               type="password"
               id="password"
               autoComplete="off"
@@ -74,6 +77,7 @@ import {UserContext} from "../contexts/UserContext"
             />
           <label>Confirm Password:</label>
             <input
+            className="form-control"
               type="password"
               id="cofrimPassword"
               autoComplete="off"

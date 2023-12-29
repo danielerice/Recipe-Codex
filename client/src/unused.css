@@ -1,0 +1,388 @@
+body {
+  margin: 1.5em;
+  font-family: sans-serif;
+  background-color: #a4a2c0
+}
+div.top{
+  margin-left:auto;
+  margin-right:auto;
+  width: fit-content;
+}
+
+div.hero {
+  position: absolute;
+  top: 19%;
+  left: 31%;
+  right: 31%;
+}
+
+p.account {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bookCard {
+
+  margin-top: 10vh;
+
+  border: 3px solid black;
+
+  /* padding: 8px; */
+
+  /* border-radius: 12px; */
+
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  position: relative;
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+  border: 1px solid black;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  
+  max-width: 300px;
+
+  margin: auto;
+
+  margin-top: 10vh;
+}
+
+.wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 38px;
+  left: 0px;
+  top: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  background: #565565;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  position: absolute;
+  top: -.5vh;
+  left: 1vw;
+  width: 174px;
+  height: 24px;
+
+
+  font-family: 'Share Tech';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 0px;
+
+  color: #A2B0D3;
+
+}
+.navBarContainer {
+  position: absolute;
+  width: fit-content;
+  right: 4vw;
+  display: flex;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.navLink {
+
+  position: relative;
+  margin-right: 2vw;
+  margin-top: 1.7vh;
+  font-family: 'Share Tech';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 0px;
+
+  color: #A2B0D3;
+
+}
+
+.center {
+  display: -moz-stack;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  margin-top: 10vh;
+}
+.home {
+  display: -moz-stack;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  margin-top: 5vh;
+}
+
+.recipe {
+  width: 300px;
+  height: 200px;
+  background-color: #f9f9f9;
+  margin: 10px;
+  padding: 20px;
+}
+
+.delete{
+position: absolute;
+right: 0;
+top: 0;
+padding: 5px 10px;
+background-color: #a4a2c0;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 5px;
+margin-right: 5px;
+}
+
+.update{
+  position: absolute;
+  right: 30px;
+  top: 0;
+  padding: 5px 10px;
+  background-color: #a4a2c0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-right: 5px;
+  }
+
+.errorMessage {
+  background-color: red;
+  color: black;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 70%;
+  border-radius: 5px;
+  height: fit-content;
+}
+
+/* Form styles */
+.formContainer {
+  
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.formContainer form {
+  display: flex;
+  flex-direction: column;
+}
+
+.formContainer label {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.formContainer input[type="text"],
+.formContainer input[type="password"],
+.formContainer select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.formContainer button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.formContainer button:hover {
+  background-color: #02acfb;
+}
+
+.formContainer button:active {
+  background-color: #3e8e41;
+}
+
+/* New Recipe Form Styles */
+.newRecipeCard {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.newRecipeCard form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.newRecipeCard label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  flex-basis: 100%;
+}
+
+.newRecipeCard select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  flex-basis: calc(50% - 5px);
+}
+
+.newRecipeCard input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+  flex-basis: 20%;
+}
+
+.newRecipeCard textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+  flex-basis: 100%;
+}
+
+.newRecipeCard button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.newRecipeCard button:hover {
+  background-color: #45a049;
+}
+
+.newRecipeCard button:active {
+  background-color: #3e8e41;
+}
+
+/* patch recipe form styles */
+
+.patchRecipeCard {
+  margin-top: 2%;
+  position: relative;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.patchRecipeCard form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.patchRecipeCard label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  flex-basis: 100%;
+}
+
+.patchRecipeCard select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  flex-basis: calc(50% - 5px);
+}
+
+.patchRecipeCard input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+  flex-basis: 20%;
+}
+
+.patchRecipeCard textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+  flex-basis: 60%;
+}
+
+.patchRecipeCard button {
+  padding: 10px 20px;
+  position: absolute;
+  right: .5%;
+  bottom: 2%;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.patchRecipeCard button:hover {
+  background-color: #45a049;
+}
+
+.patchRecipeCard button:active {
+  background-color: #3e8e41;
+}
+
+#done {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px 10px;
+  background-color: #a4a2c0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-right: 5px;
+  height: 26px;
+  }
+
+  .add {
+    position: relative;
+    display: flex;
+    padding: 5px 10px;
+    background-color: #a4a2c0;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left: 5px;
+    height: 26px;
+    }
