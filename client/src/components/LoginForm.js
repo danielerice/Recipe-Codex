@@ -36,11 +36,10 @@ function LoginForm() {
     }
 
   return (
-    <div className="col-12">
+    <div className="col-sm-12 col-lg-6">
       <form onSubmit={handleLogin}>
         <label>Username:</label>
-          <input
-          className="form-control"
+          <input className="form-control"
             type="text"
             id="name"
             autoComplete="off"
@@ -48,16 +47,15 @@ function LoginForm() {
             onChange={(e) => setUsername(e.target.value)}
           />
         <label>Password:</label>
-          <input
-          className="form-control"
+          <input className="form-control"
             type="password"
             id="password"
             autoComplete="off"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        <input type="submit" value="Login"></input>
       </form>
+      <button type="submit" value="Login" className="btn btn-primary">Login</button>
     </div>
     
   );

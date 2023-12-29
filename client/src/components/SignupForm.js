@@ -46,7 +46,7 @@ import {UserContext} from "../contexts/UserContext"
     }
 
     return (
-      <div className="col-12">
+      <div className="col-sm-12 col-lg-6">
         <form onSubmit={handleNewUser}>
           <label>Name:</label>
             <input
@@ -84,8 +84,8 @@ import {UserContext} from "../contexts/UserContext"
               value={confirmPassowrd}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-          <input type="submit" value="Create Account"></input>
           </form>
+          <button type="submit" className="btn btn-primary">Submit</button>
         </div>
     )};
 
