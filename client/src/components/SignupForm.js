@@ -84,8 +84,9 @@ import {UserContext} from "../contexts/UserContext"
               value={confirmPassowrd}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
+            <button type="submit" className="btn btn-primary">Submit</button>
           </form>
-          <button type="submit" className="btn btn-primary">Submit</button>
+
         </div>
     )};
 
