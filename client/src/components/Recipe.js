@@ -44,13 +44,13 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
     if (form) {
         return (
                 <div className="patchRecipeCard">
-                    <button id="done" onClick={(e) => patchForm()}>done</button>
-                    <form onSubmit={sendRecipe}>
+                    <button id="done" onClick={(e) => patchForm()}className="btn">done</button>
+                    <form onSubmit={sendRecipe} className="form-control">
                         <label>Name: </label>
                         <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
                         <label>Directions:</label>
                         <textarea id="directions" type="input" value={recipeDirections} onChange={(e) => setRecipeDirections(e.target.value)}></textarea>
-                        <button type="submit" >Submit</button>
+                        <button type="submit" className="btn">Submit</button>
                     </form>
                 </div>
             )
@@ -59,8 +59,8 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
 
         return (<div key={recipe.id} className="card">
                     <h3>{name}</h3>
-                    {user.id === recipe.user_id ?  <button className="delete" onClick={(e) => deleteRecipe(e)}>x</button> : <></> }
-                    {myRecipes ?  <button className="update" onClick={(e) => patchForm()}>edit</button> : <></> }
+                    {user.id === recipe.user_id ?  <button onClick={(e) => deleteRecipe(e)} className="btn">x</button> : <></> }
+                    {myRecipes ?  <button className="btn" onClick={(e) => patchForm()}>edit</button> : <></> }
                     <p>{directions}</p>
                 </div>)}
 }

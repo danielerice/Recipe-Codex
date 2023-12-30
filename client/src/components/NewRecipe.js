@@ -33,18 +33,15 @@ function NewRecipe ({ user }) {
     }
 
     return (
-        <div className="center">
-        <div className="newRecipeCard">
-            <form onSubmit={postNewRecipe}>
+        <div className="col">
+            <form onSubmit={postNewRecipe} className="form-control">
                 <label>Name: </label>
                 <input id="name" type="text" placeholder="This is an example!" onChange={(e) => setName(e.target.value)}></input>
                 <label>Directions:</label>
                 <textarea id="directions" type="input" placeholder={exampleText} onChange={(e) => setDirections(e.target.value)}></textarea>
-                <button type="submit" >Submit</button>
+                <button type="submit" className="btn">Submit</button>
             </form>
         </div>
-        </div>
-
     )
 }
 
