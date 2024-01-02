@@ -8,7 +8,7 @@ function MyRecipeBooks ({ updateRecipe, patchRecipe, updateUser, updateRecipeBoo
 
 return (
     <div>
-        <div className="home">
+        <div className="card">
             {user.my_recipe_books.map((recipeBook) => {
 
                 return <RecipeBook

@@ -67,7 +67,7 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
     }
     
     return (
-                <div id={recipeBook.id} className="bookCard">
+                <div id={recipeBook.id} className="card">
 
                     {recipeBook.name ? (<h2>{recipeBook.name}</h2>) : (<h2>Recipe Name</h2>)}
                     {recipeBook.description ? (<i>{recipeBook.description}</i>) : (<i>description</i>)}
@@ -84,15 +84,15 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
                                             patchRecipe={patchRecipe}
                                         />)})
                             ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
-                    <button type="button" className="add" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
-                    {open && <div className="content">
-                                <div className="newRecipeCard">
+                    <button type="button" className="btn btn-success" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
+                    {open && <div className="">
+                                <div className="card">
                                     <form onSubmit={postNewRecipe}>
                                         <label>Name: </label>
                                         <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
                                         <label>Directions:</label>
                                         <textarea id="directions" type="input" placeholder={exampleText} value={directions} onChange={(e) => setDirections(e.target.value)}></textarea>
-                                        <button type="submit" >Submit</button>
+                                        <button type="submit" className="btn">Submit</button>
                                     </form>
                                 </div>
                     </div>}

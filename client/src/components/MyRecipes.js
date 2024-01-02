@@ -9,7 +9,7 @@ function MyRecipes ({ updateRecipe, patchRecipe }) {
 
     return (
         <div>
-        <div className="center">
+        <div className="card">
             {user.recipes.map((recipe) => {
                 return <Recipe
                 key={recipe.id}

@@ -43,7 +43,7 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
     }
     if (form) {
         return (
-                <div className="patchRecipeCard">
+                <div className="card">
                     <button id="done" onClick={(e) => patchForm()}className="btn">done</button>
                     <form onSubmit={sendRecipe} className="form-control">
                         <label>Name: </label>
