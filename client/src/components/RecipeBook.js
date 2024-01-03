@@ -67,32 +67,38 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
     }
     
     return (
-                <div className="col-10">
+                <div className="col-10 gy-5 text-center">
                     <div id={recipeBook.id} className="card">
 
                         {recipeBook.name ? (<h2>{recipeBook.name}</h2>) : (<h2>Recipe Name</h2>)}
                         {recipeBook.description ? (<i>{recipeBook.description}</i>) : (<i>description</i>)}
                             { recipeBook.recipes && isHome ? (
                                 recipeBook.recipes.map((recipe) => {
-                                    return (<Recipe 
-                                                key={recipe.id}
-                                                recipeBookID={recipeBook.id}
-                                                name={recipe.name} 
-                                                recipeID={recipe.id} 
-                                                directions={recipe.directions}
-                                                recipe={recipe}
-                                                updateRecipe={updateRecipe}
-                                                patchRecipe={patchRecipe}
-                                            />)})
+                                    return (
+                                            <div className="row justify-content-center">
+                                                <div className="col-11 gy-5">
+                                                    <Recipe 
+                                                        key={recipe.id}
+                                                        recipeBookID={recipeBook.id}
+                                                        name={recipe.name} 
+                                                        recipeID={recipe.id} 
+                                                        directions={recipe.directions}
+                                                        recipe={recipe}
+                                                        updateRecipe={updateRecipe}
+                                                        patchRecipe={patchRecipe}
+                                                    />
+                                                </div>
+                                            </div>
+                                            )})
                                 ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
                         <button type="button" className="btn btn-success" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
                         {open && <div className="">
                                     <div className="card">
                                         <form onSubmit={postNewRecipe}>
                                             <label>Name: </label>
-                                            <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
+                                            <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)} className="form-control"></input>
                                             <label>Directions:</label>
-                                            <textarea id="directions" type="input" placeholder={exampleText} value={directions} onChange={(e) => setDirections(e.target.value)}></textarea>
+                                            <textarea id="directions" type="input" placeholder={exampleText} value={directions} onChange={(e) => setDirections(e.target.value)} className="form-control"></textarea>
                                             <button type="submit" className="btn">Submit</button>
                                         </form>
                                     </div>
