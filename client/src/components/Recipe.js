@@ -44,24 +44,42 @@ function Recipe ({ directions, name, recipe, updateRecipe, myRecipes, patchRecip
     if (form) {
         return (
                 <div className="card">
-                    <button id="done" onClick={(e) => patchForm()}className="btn">done</button>
-                    <form onSubmit={sendRecipe} className="form-control">
+                    <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <div className="btn-group">
+                            {user.id === recipe.user_id ?  <button onClick={(e) => deleteRecipe(e)} className="btn">x</button> : <></> }
+                            {myRecipes ?  <button className="btn" onClick={(e) => patchForm()}>edit</button> : <></> }
+                        </div>
+                    </div>
+                    <div className="card-body">
+                    <form onSubmit={sendRecipe}>
                         <label>Name: </label>
-                        <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
+                        <input  className="form-control" id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)}></input>
                         <label>Directions:</label>
-                        <textarea id="directions" type="input" value={recipeDirections} onChange={(e) => setRecipeDirections(e.target.value)}></textarea>
+                        <textarea  className="form-control" id="directions" type="input" value={recipeDirections} onChange={(e) => setRecipeDirections(e.target.value)}></textarea>
                         <button type="submit" className="btn">Submit</button>
                     </form>
+                    </div>
                 </div>
             )
     }
     if (!form) {
 
         return (<div key={recipe.id} className="card">
-                    <h3>{name}</h3>
-                    {user.id === recipe.user_id ?  <button onClick={(e) => deleteRecipe(e)} className="btn">x</button> : <></> }
-                    {myRecipes ?  <button className="btn" onClick={(e) => patchForm()}>edit</button> : <></> }
+                    
+                    <h3 className="card-header">
+                        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <div className="btn-group">
+                                {user.id === recipe.user_id ?  <button onClick={(e) => deleteRecipe(e)} className="btn">x</button> : <></> }
+                                {myRecipes ?  <button className="btn" onClick={(e) => patchForm()}>edit</button> : <></> }
+                            </div>
+                        </div>
+                        {name}
+                    </h3>
+                    
+                    <div className="card-body">
+                    <h4>Directions: </h4>
                     <p>{directions}</p>
+                    </div>
                 </div>)}
 }
 

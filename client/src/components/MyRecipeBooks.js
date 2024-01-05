@@ -7,21 +7,23 @@ function MyRecipeBooks ({ updateRecipe, patchRecipe, updateUser, updateRecipeBoo
     const {user} = useContext(UserContext);
 
 return (
-    <div>
-        <div className="card">
+        <div className="container-fluid">
             {user.my_recipe_books.map((recipeBook) => {
 
-                return <RecipeBook
-                            recipeBook={recipeBook}
-                            key={recipeBook.id}
-                            isHome={false}
-                            patchRecipe={patchRecipe}
-                            updateUser={updateUser}
-                            updateRecipeBooks={updateRecipeBooks}
+                return (
+                    <div className="row justify-content-center">
+                        <RecipeBook
+                        isHome={true}
+                        recipeBook={recipeBook} 
+                        key={recipeBook.id}
+                        updateRecipe={updateRecipe}
+                        patchRecipe={patchRecipe}
+                        updateUser={updateUser}
+                        updateRecipeBooks={updateRecipeBooks}
                         />
+                    </div>)
             })}
         </div>
-    </div>
 )
 }
 

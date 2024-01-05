@@ -65,44 +65,44 @@ function RecipeBook ({ updateRecipe, recipeBook, patchRecipe, updateRecipeBooks,
         setRecipeName("");
         setDirections("");
     }
+
+    function createRecipeGrid() {
+        const grid = []
+        for (let i=0; i < recipeBook.recipes.length; i++) {
+            grid.push(
+                <div key={i} className="row justify-content-center">
+                    <div className="col-5 gy-3">{recipeBook.recipes[i] ? <Recipe key={recipeBook.recipes[i].name} recipeBookID={recipeBook.id} name={recipeBook.recipes[i].name} recipeID={recipeBook.recipes[i].id} directions={recipeBook.recipes[i].directions} recipe={recipeBook.recipes[i]} updateRecipe={updateRecipe} patchRecipe={patchRecipe} />: <></>}</div>
+                    <div className="col-5 gy-3">{recipeBook.recipes[i+1] ? <Recipe key={recipeBook.recipes[i+1].name} recipeBookID={recipeBook.id} name={recipeBook.recipes[i+1].name} recipeID={recipeBook.recipes[i+1].id} directions={recipeBook.recipes[i+1].directions} recipe={recipeBook.recipes[i+1]} updateRecipe={updateRecipe} patchRecipe={patchRecipe} /> : <></>}</div>
+                </div>)
+                i++
+        }
+        return grid.map((row) => {
+            return row
+        })
+    }
     
     return (
                 <div className="col-10 gy-5 text-center">
                     <div id={recipeBook.id} className="card">
 
-                        {recipeBook.name ? (<h2>{recipeBook.name}</h2>) : (<h2>Recipe Name</h2>)}
+                        {recipeBook.name ? (<h2 className="card-header">{recipeBook.name}</h2>) : (<h2 className="card-header">Recipe Name</h2>)}
                         {recipeBook.description ? (<i>{recipeBook.description}</i>) : (<i>description</i>)}
-                            { recipeBook.recipes && isHome ? (
-                                recipeBook.recipes.map((recipe) => {
-                                    return (
-                                            <div className="row justify-content-center">
-                                                <div className="col-11 gy-5">
-                                                    <Recipe 
-                                                        key={recipe.id}
-                                                        recipeBookID={recipeBook.id}
-                                                        name={recipe.name} 
-                                                        recipeID={recipe.id} 
-                                                        directions={recipe.directions}
-                                                        recipe={recipe}
-                                                        updateRecipe={updateRecipe}
-                                                        patchRecipe={patchRecipe}
-                                                    />
-                                                </div>
-                                            </div>
-                                            )})
-                                ) : (<div className="card"><p>Add Some Recipes!</p></div>)}
-                        <button type="button" className="btn btn-success" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
-                        {open && <div className="">
-                                    <div className="card">
-                                        <form onSubmit={postNewRecipe}>
-                                            <label>Name: </label>
-                                            <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)} className="form-control"></input>
-                                            <label>Directions:</label>
-                                            <textarea id="directions" type="input" placeholder={exampleText} value={directions} onChange={(e) => setDirections(e.target.value)} className="form-control"></textarea>
-                                            <button type="submit" className="btn">Submit</button>
-                                        </form>
-                                    </div>
-                        </div>}
+                        { recipeBook.recipes && isHome ? createRecipeGrid() : ( isHome ? <></> : <div className="card"><p className="card-header">Add Some Recipes!</p></div> )}
+
+                        <div className="row justify-content-center">
+                            <div className="col-2 gy-3">
+                                <button type="button" className="btn btn-outline-primary" onClick={(e) => setOpen(!open)}>{open ? ("Done") : ("Add a Recipe!") }</button>
+                            </div>
+                            {open &&    <div className="card">
+                                            <form onSubmit={postNewRecipe}>
+                                                <label>Name: </label>
+                                                <input id="name" type="text" placeholder="This is an example!" value={recipeName} onChange={(e) => setRecipeName(e.target.value)} className="form-control"></input>
+                                                <label>Directions:</label>
+                                                <textarea id="directions" type="input" placeholder={exampleText} value={directions} onChange={(e) => setDirections(e.target.value)} className="form-control"></textarea>
+                                                <button type="submit" className="btn">Submit</button>
+                                            </form>
+                                        </div>}
+                        </div>
                     </div>
                 </div>
     )
