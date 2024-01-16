@@ -12,7 +12,7 @@ import LoginForm from "./LoginForm";
         <div className="container-fluid">
             
             <div className="row justify-content-center">
-                <div className="col-xsm-12 col-lg-6 text-center">
+                <div className="col-xsm-12 col-lg-6 text-center  gy-5">
                     <h1>Welcome To Recipe Codex!</h1>
                 </div>
             </div>
